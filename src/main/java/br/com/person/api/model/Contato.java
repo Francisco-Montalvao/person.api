@@ -18,7 +18,6 @@ public class Contato {
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-
     public Contato(String email, Integer telefone, Integer ddd) {
         this.email = email;
         this.telefone = telefone;
