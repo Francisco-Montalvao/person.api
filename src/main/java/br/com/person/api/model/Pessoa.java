@@ -1,62 +1,44 @@
 package br.com.person.api.model;
 
-import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 
 @Entity
 @Table(name = "pessoa_tb")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String nome;
-    private String endereco;
-    private String bairro;
-    private Integer cep;
-    private String cidade;
-    private String estado;
+	private String nome;
+	private String endereco;
+	private String bairro;
+	private Integer cep;
+	private String cidade;
+	private String estado;
+	private String tipo;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-    private Set<Contato> contatos = new HashSet<>();
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	private Set<Contato> contatos = new HashSet<>();
 
-    public Pessoa(String nome, String endereco, String bairro, Integer cep, String ciddade, String estado) {
-        this.nome = nome;
-        this.endereco = endereco;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.cidade = ciddade;
-        this.estado = estado;
-    }
-
-    public Pessoa() {
-
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public Integer getCep() {
-        return cep;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
 }
